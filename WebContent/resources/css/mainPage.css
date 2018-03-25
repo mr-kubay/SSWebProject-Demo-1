@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+}
+header {
+	width: 65%;
+	height: 75px;
+	background-color:rgb(86,130,163); 
+    border-radius: 0 0 8px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+}
+#userPlace {
+
+	width: 30%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+#userPlace  a {	
+	text-decoration: none;
+	color: white;
+}
+#userPlace  a:hover {	
+	text-decoration: none;
+	color: lightgrey;
+}
+
+#outerBlock {
+
+	width: 30%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	font-size: 15px;
+}
+
+#outerBlock a{
+	text-decoration: none;
+	color: white;
+}
+#outerBlock a:hover{
+	text-decoration: none;
+	color: lightgrey;
+}
+
+#mainBlock {
+	margin: 75px 0;
+	width: 65%;
+	background-color: white;
+	border-radius: 10px 10px 10px 10px;
+	display: flex;
+	justify-content: center;
+}
+
+#itemsTable {
+	font-size: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	border:2px solid grey;
+		border-collapse: collapse;
+		margin-top: 30px;
+		margin-bottom: 30px;
+}
+
+#itemsTable th,td{
+	padding: 10px;
+	border:2px solid grey;
+
+}
+
+footer {
+	width: 65%;
+	height: 75px;
+	background-color:rgb(86,130,163); 
+    border-radius: 0 0 8px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+}
+

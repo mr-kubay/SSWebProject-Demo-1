@@ -1,0 +1,101 @@
+ @charset "UTF-8";
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.inputUserForm {
+	width: 200px;
+	height: 30px;
+	border-radius: 8px 8px 8px 8px;
+	outline: none;
+	font-size: 15px;
+	padding-left: 3px;
+	border:1px solid  #999999;
+	box-shadow: none;
+
+}
+
+
+
+#mainBlock {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight:normal;
+	color: #999999;
+	width: 30%;
+	height: 500px;
+	margin-top: 20px;
+	margin-bottom: 100px;
+	border-radius: 18px 18px 18px 18px;
+	background-color: white;
+	box-shadow: 0 0 20px rgba(0,0,0,0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#userForm {
+	width: 85%;
+	height: 90%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+
+}
+
+
+.fieldBlock {
+	width: 90%;
+	height: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+
+#buttonBlock {
+	width: 90%;
+	height: 50px;
+	display: flex;
+	justify-content: space-around;
+	color: white;
+}
+
+#submitButton {
+	width: 50%;
+	background-color: #00b300;
+	border-radius: 5px 5px 5px 5px;	
+	color: inherit;
+	font-family: sans-serif;
+	font-size: 18px;
+}
+
+#createButton {
+	width: 50%;
+	border-radius: 5px 5px 5px 5px;	
+	color: grey;
+	font-family: sans-serif;
+	font-size: 18px;
+}
+#buttonBlock a {
+	width: 48%;
+	text-decoration: none;
+	color: inherit;
+	background-color: #0099ff;
+	border-radius: 5px 5px 5px 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
