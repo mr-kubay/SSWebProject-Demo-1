@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.softserve.academy.dashboard.dto.UserDTO;
 import com.softserve.academy.dashboard.entity.UserEntity;
+import com.softserve.academy.dashboard.tools.Attribute;
 import com.softserve.academy.dashboard.tools.Context;
 
 @WebServlet("/usercreate")
@@ -20,7 +21,14 @@ public class UserProfileCreateServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/user/userProfile.jsp").forward(request, response);
+		if(request.getSession().getAttribute(Attribute.loginAttr)!=null) {
+			request.getSession().setAttribute("errorMessageToUserItems", "To create user please logout first");
+			request.getRequestDispatcher("/useritems").forward(request, response); 
+		}else {
+			request.getRequestDispatcher("/WEB-INF/views/user/userProfile.jsp").forward(request, response);
+		}
+	
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,11 +44,12 @@ public class UserProfileCreateServlet extends HttpServlet {
 
 		
 		if(result) {
+			request.getSession().invalidate();
 			UserDTO userDTO = new UserDTO(-1, request.getParameter("login"), request.getParameter("email"), request.getParameter("password"));
 			result = Context.getInstance().getUserService().setUserDTO(userDTO);
 		}
 		if(result) {
-			request.getSession().invalidate();
+			
 			request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
 		} else {
 			request.setAttribute("errorMessage", "Problem with creating user");

@@ -47,7 +47,12 @@
 		<h1>Item's list is empty</h1>
 		</c:otherwise>
 		</c:choose>
+		<br>
+		
 	</div>
+	<c:if test="${not empty errorMessageToUserItems}">
+		<font color="red">${errorMessageToUserItems}</font>
+	</c:if>
 <footer >
     <<div id="outerBlock">
 		<a href="${base}/logout">logout</a>
