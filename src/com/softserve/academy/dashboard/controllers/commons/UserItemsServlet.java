@@ -32,6 +32,7 @@ public class UserItemsServlet extends HttpServlet {
 					.getUserItems(loginDTO);
 			
 			request.setAttribute(Attribute.userItemsDtoAttr, userItemsDto);
+			
 			request.getRequestDispatcher("/WEB-INF/views/common/useritems.jsp").forward(request, response);			
 		}else {
 			request.setAttribute("errorMessage", "Access denied you must be logged in");

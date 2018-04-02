@@ -8,9 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<style type="text/css">
-  <%@include file="/resources/css/item.css" %>
-</style>
+<link rel="stylesheet" type="text/css" href="css/item.css">
 </head>
 <body>
 	<div>

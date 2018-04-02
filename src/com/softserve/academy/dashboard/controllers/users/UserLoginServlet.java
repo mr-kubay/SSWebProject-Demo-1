@@ -15,7 +15,7 @@ import com.softserve.academy.dashboard.tools.Attribute;
 import com.softserve.academy.dashboard.tools.Context;
 
 //mine
-@WebServlet({"/", "/login"})
+@WebServlet("/login")
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -8,9 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Profile</title>
-<style type="text/css">
-  <%@include file="/resources/css/user.css" %>
-</style>
+<link rel="stylesheet" type="text/css" href="css/user.css">
 </head>
 <body>
 <div><h1>User</h1></div>

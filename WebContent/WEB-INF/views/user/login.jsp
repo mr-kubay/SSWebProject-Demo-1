@@ -8,9 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<style type="text/css">
-  <%@include file="/resources/css/login.css" %>
-</style>
+ 
+<link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
 <div id="mainBlock">

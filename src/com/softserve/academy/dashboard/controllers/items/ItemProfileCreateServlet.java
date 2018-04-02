@@ -53,6 +53,7 @@ public class ItemProfileCreateServlet extends HttpServlet {
 			UserItemsDto userItemsDto = Context.getInstance()
 					.getUserItemsService().getUserItems(loginDto);
 			request.getSession().setAttribute(Attribute.userItemsDtoAttr, userItemsDto);
+			//response.sendRedirect("/WebProject/useritems");
 			request.getRequestDispatcher("/WEB-INF/views/common/useritems.jsp").forward(request, response);	
 		} else {
 			request.setAttribute("errorMessage", "Cant save item to DB");

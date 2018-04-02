@@ -8,9 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>user items</title>
-<style type="text/css">
-  <%@include file="/resources/css/mainPage.css" %>
-</style>
+<link rel="stylesheet" type="text/css" href="css/mainPage.css">
 </head>
 <body>
 <header>
