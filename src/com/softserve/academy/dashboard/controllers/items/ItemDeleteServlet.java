@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.softserve.academy.dashboard.dto.ItemDTO;
-import com.softserve.academy.dashboard.dto.LoginDTO;
-import com.softserve.academy.dashboard.dto.UserItemsDto;
+import com.softserve.academy.dashboard.tools.Attribute;
 import com.softserve.academy.dashboard.tools.Context;
+import com.softserve.academy.dashboard.tools.Path;
 
-@WebServlet("/itemdelete")
+@WebServlet(Path.ITEM_PROFILE_DELETE_SERVLET_MAPPING)
 public class ItemDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,7 +23,7 @@ public class ItemDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String login = (String) request.getSession().getAttribute("login");
+		String login = (String) request.getSession().getAttribute(Attribute.LOGIN_ATTR);
 		
 		boolean result = login != null 
 				&& !login.isEmpty() 
@@ -36,10 +36,11 @@ public class ItemDeleteServlet extends HttpServlet {
 				ItemDTO itemDto = new ItemDTO(idItem);
 				Context.getInstance().getItemService().removeItem(itemDto);
 			}
-			request.getRequestDispatcher("/useritems").forward(request, response);
+			response.sendRedirect(Path.REDIRECTION_MAPPING + Path.USER_ITEMS_SERVLET_MAPPING);
+			//request.getRequestDispatcher(Path.USER_ITEMS_JSP_PATH).forward(request, response);
 		} else {
-			request.setAttribute("errorMessage", "Access Denied. You Must be Logged");
-			request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
+			request.setAttribute(Attribute.ERROR_MESSAGE_ATTR, "Access Denied. You Must be Logged");
+			request.getRequestDispatcher(Path.LOGIN_SERVLET_MAPPING).forward(request, response);
 		}
 		
 	}

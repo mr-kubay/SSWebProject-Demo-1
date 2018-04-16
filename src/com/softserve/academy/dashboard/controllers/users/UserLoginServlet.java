@@ -1,8 +1,6 @@
 package com.softserve.academy.dashboard.controllers.users;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.softserve.academy.dashboard.dto.LoginDTO;
 import com.softserve.academy.dashboard.tools.Attribute;
 import com.softserve.academy.dashboard.tools.Context;
+import com.softserve.academy.dashboard.tools.Path;
 
-//mine
-@WebServlet("/login")
+@WebServlet(Path.LOGIN_SERVLET_MAPPING)
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,17 +21,11 @@ public class UserLoginServlet extends HttpServlet {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
+		
+		request.getRequestDispatcher(Path.LOGIN_JSP_PATH).forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean result = request.getParameter("login")!=null 
 				&& !request.getParameter("login").isEmpty() 
@@ -49,12 +41,13 @@ public class UserLoginServlet extends HttpServlet {
 		}
 		
 		if(result) {
-			request.getSession().setAttribute(Attribute.loginAttr, request.getParameter("login"));
-			request.getRequestDispatcher("/useritems").forward(request, response);
+			request.getSession().setAttribute(Attribute.LOGIN_ATTR, request.getParameter("login"));
+			response.sendRedirect(Path.REDIRECTION_MAPPING + Path.USER_ITEMS_SERVLET_MAPPING);
+			//request.getRequestDispatcher(Path.USER_ITEMS_SERVLET_MAPPING).forward(request, response);
 		}
 		else {
-			request.setAttribute("errorMessage", "Invalid Username or Password");
-			request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
+			request.setAttribute(Attribute.ERROR_MESSAGE_ATTR, "Invalid Username or Password");
+			request.getRequestDispatcher(Path.LOGIN_JSP_PATH).forward(request, response);
 		}
 	}
 

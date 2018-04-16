@@ -8,7 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Profile</title>
-<link rel="stylesheet" type="text/css" href="css/user.css">
+<style type="text/css">
+  <%@include file="/css/user.css" %>
+</style>
 </head>
 <body>
 <div><h1>User</h1></div>
@@ -27,8 +29,7 @@
 		<div class="fieldBlock">
 			Login : <input type="text" name="login" class="inputUserForm"
 				placeholder="Login" value="${userDto.login}">
-				 <input
-				type="hidden" name="id" value="${userDto.idUser}">
+				
 		</div>
 
 		<div class="fieldBlock">

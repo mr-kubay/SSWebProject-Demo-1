@@ -11,11 +11,11 @@ import com.softserve.academy.dashboard.dto.ItemDTO;
 import com.softserve.academy.dashboard.dto.LoginDTO;
 import com.softserve.academy.dashboard.dto.UserDTO;
 import com.softserve.academy.dashboard.dto.UserItemsDto;
-import com.softserve.academy.dashboard.entity.ItemEntity;
 import com.softserve.academy.dashboard.tools.Attribute;
 import com.softserve.academy.dashboard.tools.Context;
+import com.softserve.academy.dashboard.tools.Path;
 
-@WebServlet("/itemcreate")
+@WebServlet(Path.ITEM_PROFILE_CREATE_SERVLET_MAPPING)
 public class ItemProfileCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,13 +24,12 @@ public class ItemProfileCreateServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
-		System.out.println("login =" + login);
+		/*String login = (String)request.getSession().getAttribute(Attribute.LOGIN_ATTR);
 		UserDTO userDTO = Context.getInstance().getUserService().getUserDTO(login);
 		if(userDTO != null) {
 			request.getSession().setAttribute("userLogin",userDTO.getLogin());
-		}
-		request.getRequestDispatcher("/WEB-INF/views/item/itemProfile.jsp").forward(request, response);	
+		}*/
+		request.getRequestDispatcher(Path.ITEM_PROFILE_JSP_PATH).forward(request, response);	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,24 +39,24 @@ public class ItemProfileCreateServlet extends HttpServlet {
 				&&request.getParameter("description") != null
 				&& !request.getParameter("description").isEmpty();
 		
-		String userLogin = (String)request.getSession().getAttribute("userLogin");
+		String login = (String)request.getSession().getAttribute(Attribute.LOGIN_ATTR);
 		if(result) {
-			UserDTO userDTO = Context.getInstance().getUserService().getUserDTO(userLogin);
+			UserDTO userDTO = Context.getInstance().getUserService().getUserDTO(login);
 			
 			ItemDTO itemDTO = new ItemDTO(-1, request.getParameter("title"), request.getParameter("description"),userDTO.getIdUser());
 			result = Context.getInstance().getItemService().setItemDto(itemDTO);
 		}
 		
 		if(result) {
-			LoginDTO loginDto = new LoginDTO(userLogin, new String());
+			LoginDTO loginDto = new LoginDTO(login, new String());
 			UserItemsDto userItemsDto = Context.getInstance()
 					.getUserItemsService().getUserItems(loginDto);
-			request.getSession().setAttribute(Attribute.userItemsDtoAttr, userItemsDto);
-			//response.sendRedirect("/WebProject/useritems");
-			request.getRequestDispatcher("/WEB-INF/views/common/useritems.jsp").forward(request, response);	
+			request.getSession().setAttribute(Attribute.USER_ITEMS_DTO_ATTR, userItemsDto);
+			response.sendRedirect(Path.REDIRECTION_MAPPING + Path.USER_ITEMS_SERVLET_MAPPING);
+			//request.getRequestDispatcher("/useritems").forward(request, response);	
 		} else {
-			request.setAttribute("errorMessage", "Cant save item to DB");
-			request.getRequestDispatcher("/WEB-INF/views/item/itemProfile.jsp").forward(request, response);
+			request.setAttribute(Attribute.ERROR_MESSAGE_ATTR, "Cant save item to DB");
+			request.getRequestDispatcher(Path.ITEM_PROFILE_JSP_PATH).forward(request, response);
 		}
 		
 	}

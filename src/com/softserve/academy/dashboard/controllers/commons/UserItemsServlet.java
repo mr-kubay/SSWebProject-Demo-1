@@ -11,8 +11,9 @@ import com.softserve.academy.dashboard.dto.LoginDTO;
 import com.softserve.academy.dashboard.dto.UserItemsDto;
 import com.softserve.academy.dashboard.tools.Attribute;
 import com.softserve.academy.dashboard.tools.Context;
+import com.softserve.academy.dashboard.tools.Path;
 
-@WebServlet("/useritems")
+@WebServlet(Path.USER_ITEMS_SERVLET_MAPPING)
 public class UserItemsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -22,7 +23,7 @@ public class UserItemsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String loginName = (String) request.getSession().getAttribute(Attribute.loginAttr);
+		String loginName = (String) request.getSession().getAttribute(Attribute.LOGIN_ATTR);
 		if(loginName != null && !loginName.isEmpty()) {
 			LoginDTO loginDTO = new LoginDTO(loginName, new String());
 			
@@ -31,12 +32,13 @@ public class UserItemsServlet extends HttpServlet {
 					.getUserItemsService()
 					.getUserItems(loginDTO);
 			
-			request.setAttribute(Attribute.userItemsDtoAttr, userItemsDto);
+			request.getSession().setAttribute(Attribute.USER_ITEMS_DTO_ATTR, userItemsDto);
 			
-			request.getRequestDispatcher("/WEB-INF/views/common/useritems.jsp").forward(request, response);			
+			request.getRequestDispatcher(Path.USER_ITEMS_JSP_PATH).forward(request, response);			
 		}else {
-			request.setAttribute("errorMessage", "Access denied you must be logged in");
-			request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
+			request.setAttribute(Attribute.ERROR_MESSAGE_ATTR, "Access denied you must be logged in");
+			response.sendRedirect(Path.REDIRECTION_MAPPING + Path.LOGIN_SERVLET_MAPPING);
+			//request.getRequestDispatcher(Path.LOGIN_SERVLET_MAPPING).forward(request, response);
 		}
 		
 	}

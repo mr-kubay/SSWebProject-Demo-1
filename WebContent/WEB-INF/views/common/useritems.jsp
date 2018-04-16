@@ -8,12 +8,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>user items</title>
-<link rel="stylesheet" type="text/css" href="css/mainPage.css">
+<style type="text/css">
+  <%@include file="/css/mainPage.css" %>
+</style>
 </head>
 <body>
 <header>
 	<div id="userPlace">
-		<a href="${base}/useredit?login=${userItemsDto.userName}">${userItemsDto.userName} </a>
+		<a href="${base}/useredit">${userItemsDto.userName} </a>
 	</div>
 	
 </header>
@@ -26,7 +28,7 @@
 				<tr>
 					<th>Title</th>
 					<th>Description</th>
-					<th colspan="2"><a href="${base}/itemcreate?login=${userItemsDto.userName}">Add Item</a></th>
+					<th colspan="2"><a href="${base}/itemcreate">Add Item</a></th>
 				</tr>
 
 				<c:forEach items="${userItemsDto.itemsList}" var="item">
@@ -34,8 +36,8 @@
 						<td>${item.title}</td>
 						<td>${item.description}</td>
 
-						<td><a href="${base}/itemedit?login=${userItemsDto.userName}&item=${item.title}"> edit</a></td>
-						<td><a href="${base}/itemdelete?idItem=${item.idItem}"> delete</a></td>
+						<td><a href="${base}/itemedit?item=${item.title}"> edit</a></td>
+						<td><a href="${base}/itemdelete?idItem=${item.idItem}"  onclick="return confirm('Are you sure you want to delete this item?');"> delete</a></td>
 					</tr>
 				</c:forEach>
 
@@ -43,13 +45,15 @@
 		</c:when>
 		<c:otherwise>
 		<h1>Item's list is empty</h1>
+		<br>
+			<a href="${base}/itemcreate">Add Item</a>
 		</c:otherwise>
 		</c:choose>
 		<br>
 		
 	</div>
-	<c:if test="${not empty errorMessageToUserItems}">
-		<font color="red">${errorMessageToUserItems}</font>
+	<c:if test="${not empty errorMessage}">
+		<font color="red">${errorMessage}</font>
 	</c:if>
 <footer >
     <<div id="outerBlock">
